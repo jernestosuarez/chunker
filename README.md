@@ -18,7 +18,10 @@ ruby chunker.rb -i [input-file.mp4] -t [times_file.txt]
 ```
 
 ## Options
+The script support following options
+```
 -i, --input Input file
 -t, --times File with times in format HH:MM:SS, one for each line
 -v, --verbose verbose mode
 -h, --help this help
+```
