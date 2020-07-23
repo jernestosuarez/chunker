@@ -99,16 +99,18 @@ progressbar = ProgressBar.create(:title => "Chunking",
                                 :starting_at    => 0)
            
 # Working with results
+@rows =[]
 @times.each_with_index do |time,index|
     from = time[0]
     to = time[1]
     #puts "Chunking from second #{from} to second #{to}"
     raise "Error executing this shit!" unless execute("ffmpeg -i #{inputfile} -ss #{from} -t #{to} -c copy #{output_prefix}_part#{index}.#{extension}")
     progressbar.increment
+    @rows << ["#{output_prefix}_part#{index}.#{extension}",from,to]
 end
 
-@header = ["from","to"]
-@rows = @times
+@header = ["file","from","to"]
+
 
 puts Terminal::Table.new :headings => @header, :rows => @rows
 puts "\u{1F37A} Done! (you owe me \u{1F37A}\u{1F37A} ;)"
